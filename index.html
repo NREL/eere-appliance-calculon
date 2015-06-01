@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" media="all">
+    <style>
+        body {
+            padding-top: 2em;
+        }
+        .input-group-addon {
+            border-top-right-radius:0;
+            border-bottom-right-radius:0;
+            min-width:40px;
+        }
+        select,
+        .form-control,
+        select.form-control {
+            border-top-left-radius:0;
+            border-bottom-left-radius:0;
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+        }
+        * {
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+        }
+        .results {
+            color: #fff;
+            background-color: #000;
+            min-height: 60px;
+            padding: 7px;
+            text-align: center;
+
+        }
+        .results .results-row {
+            display: table;
+            width: 100%;
+        }
+        .results .results-row .data {
+            display: table-cell;
+            font-size: 1.5em;
+            width: 50%
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+
+<div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-lightbulb-o"></i></span>
+    <select class="form-control" id="appliance">
+        <option value=""  disabled selected >My appliance</option>
+        <option value="Dishwasher">Dishwasher</option>
+        <option value="Electric">Electric furnace</option>
+        <option value="Oven">Oven</option>
+    </select>
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-bolt"></i></span>
+    <select class="form-control" id="watts">
+        <option value="" disabled selected >Wattage</option>
+        <option value="10000">10000</option>
+        <option value="20000">20000</option>
+        <option value="30000">30000</option>
+    </select>
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-clock-o"></i></span>
+    <input type="text" class="form-control" placeholder="Hours used per day" aria-describedby="basic-addon1" id="hours">
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+    <input type="text" class="form-control" placeholder="Days used per year" aria-describedby="basic-addon2" id="days">
+</div>
+
+
+<div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+    <select class="form-control" id="rate">
+        <option value="" disabled selected >Utility Rate</option>
+        <option value="0.11">11&cent;/kWh (US Average)</option>
+        <option value="0.10">10&cent;/kWh (Alabama)</option>
+        <option value="0.09">09&cent;/kWh (Alaska)</option>
+    </select>
+</div>
+
+<div class="results">
+    <div class="header">My annual energy per year</div>
+    <div class="results-row">
+        <div class="data" id="energy"></div>
+        <div class="data" id="cost"></div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    // eia api 4A8DA35AF7501244A974E9603C4FF11B
+
+    // convenience variables
+    var energy = 0
+      , cost   = 0;
+
+    // DOM caching
+    var $controls = $('.form-control')
+      , $watts    = $('#watts')
+      , $hours    = $('#hours')
+      , $days     = $('#days')
+      , $rate     = $('#rate')
+      , $energy   = $('#energy')
+      , $cost     = $('#cost');
+
+    // functions
+    var recalculate = function(){
+        var completed = false;
+
+        $controls.each( function(){
+            return (completed = $(this).val() ? true : false);
+        });
+
+        if(completed) {
+            energy = $watts.val() * $hours.val() *  $days.val();
+            cost = energy * $rate.val();
+            $energy.html(  energy + ' kWh');
+            $cost.html( '$' + cost );
+        }
+    };
+
+    // Event handlers
+    $controls.on( 'change', recalculate);
+
+});
+
+</script>
+
+
+</body>
+</html>
