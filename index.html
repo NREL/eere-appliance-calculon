@@ -6,7 +6,11 @@
     <title></title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.min.css" rel="stylesheet" media="all">
+
+
     <style>
         body {
             padding-top: 2em;
@@ -19,6 +23,8 @@
         select,
         .form-control,
         select.form-control {
+            /*border: 0;
+            box-shadow: none;*/
             border-top-left-radius:0;
             border-bottom-left-radius:0;
             -webkit-border-radius: 0 !important;
@@ -29,6 +35,9 @@
             -webkit-border-radius: 0 !important;
             -moz-border-radius: 0 !important;
             border-radius: 0 !important;
+        }
+        .bootstrap-select .btn {
+
         }
         .results {
             color: #fff;
@@ -55,46 +64,51 @@
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
+            <div class="title">Appliance Energy Calculator</div>
+
 <div class="input-group">
-    <span class="input-group-addon"><i class="fa fa-lightbulb-o"></i></span>
-    <select class="form-control" id="appliance">
-        <option value=""  disabled selected >My appliance</option>
-        <option value="Dishwasher">Dishwasher</option>
-        <option value="Electric">Electric furnace</option>
-        <option value="Oven">Oven</option>
+    <span class="input-group-addon" id="watts-addon"><i class="fa fa-lightbulb-o"></i></span>
+    <label for="appliances">My appliance</label>
+    <select
+        id="appliances"
+        class="form-control"
+        aria-describedby="watts-addon"
+        data-live-search="true">
     </select>
 </div>
 
-<div class="input-group">
-    <span class="input-group-addon"><i class="fa fa-bolt"></i></span>
-    <select class="form-control" id="watts">
-        <option value="" disabled selected >Wattage</option>
-        <option value="10000">10000</option>
-        <option value="20000">20000</option>
-        <option value="30000">30000</option>
+
+<div class="input-group watts-group">
+    <span class="input-group-addon" id="watts-addon"><i class="fa fa-bolt"></i></span>
+    <label for="watts">Wattage</label>
+    <input id="watts" type="number" class="form-control" aria-describedby="watts-addon" value="">
+</div>
+
+
+<div class="input-group states-group">
+    <span class="input-group-addon" id="state-addon"><i class="fa fa-money"></i></span>
+    <label for="states">Utility rate</label>
+    <select
+        id="states"
+        class="form-control"
+        aria-describedby="state-addon">
     </select>
 </div>
 
-<div class="input-group">
-    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-clock-o"></i></span>
-    <input type="text" class="form-control" placeholder="Hours used per day" aria-describedby="basic-addon1" id="hours">
-</div>
 
-<div class="input-group">
-    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-calendar"></i></span>
-    <input type="text" class="form-control" placeholder="Days used per year" aria-describedby="basic-addon2" id="days">
+<div class="input-group hours-group">
+    <span class="input-group-addon" id="hours-addon"><i class="fa fa-clock-o"></i></span>
+    <label for="hours">Hours used per day</label>
+    <input id="hours" type="number" class="form-control" aria-describedby="hours-addon">
 </div>
 
 
-<div class="input-group">
-    <span class="input-group-addon"><i class="fa fa-money"></i></span>
-    <select class="form-control" id="rate">
-        <option value="" disabled selected >Utility Rate</option>
-        <option value="0.11">11&cent;/kWh (US Average)</option>
-        <option value="0.10">10&cent;/kWh (Alabama)</option>
-        <option value="0.09">09&cent;/kWh (Alaska)</option>
-    </select>
+<div class="input-group days-group">
+    <span class="input-group-addon" id="days-addon"><i class="fa fa-calendar"></i></span>
+    <label for="days">Days used per year</label>
+    <input id="days" type="number" class="form-control" aria-describedby="days-addon">
 </div>
+
 
 <div class="results">
     <div class="header">My annual energy per year</div>
@@ -109,43 +123,259 @@
 </div>
 
 
+<!-- Libraries -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+
+
+<!-- Templates -->
+<script id="appliance-template" type="text/x-handlebars-template">
+    {{#each appliances}}
+    <option value="{{watts}}">{{appliance}}</option>
+    {{/each}}
+</script>
+
+<script id="state-template" type="text/x-handlebars-template">
+    {{! Values are added later via AJAX on demand }}
+    {{#each states}}
+    <option value="" data-state-code="{{code}}">{{state}}</option>
+    {{/each}}
+</script>
+
+<!-- Data -->
+<script id="appliance-data"  type="application/json">
+    {
+        "appliances" : [
+            { "appliance" : "Aquarium Equipment" , "watts" : "24"},
+            { "appliance" : "Boom Box" , "watts" : "8"},
+            { "appliance" : "Cable Box" , "watts" : "140"},
+            { "appliance" : "CD Player" , "watts" : "7"},
+            { "appliance" : "Ceiling Fan (only fan motor)" , "watts" : "35"},
+            { "appliance" : "Clothes Dryer" , "watts" : "999999"},
+            { "appliance" : "Clothes Washer" , "watts" : "999999"},
+            { "appliance" : "Coffee Maker" , "watts" : "1000"},
+            { "appliance" : "Compactors" , "watts" : "400"},
+            { "appliance" : "Computer - Desktop PC" , "watts" : "75"},
+            { "appliance" : "Computer - Notebook PC" , "watts" : "25"},
+            { "appliance" : "Deep Fryer" , "watts" : "1000"},
+            { "appliance" : "Desktop Computer Monitor" , "watts" : "42"},
+            { "appliance" : "Dishwasher" , "watts" : "999999"},
+            { "appliance" : "DVD/VCR" , "watts" : "17"},
+            { "appliance" : "Electric blanket" , "watts" : "400"},
+            { "appliance" : "Electronic air cleaner/filter" , "watts" : "50"},
+            { "appliance" : "Freezer" , "watts" : "999999"},
+            { "appliance" : "Furnace Fan" , "watts" : "295"},
+            { "appliance" : "Garage door opener" , "watts" : "400"},
+            { "appliance" : "Hair Dryer" , "watts" : "710"},
+            { "appliance" : "Humidifier" , "watts" : "11"},
+            { "appliance" : "Iron" , "watts" : "1100"},
+            { "appliance" : "Lawn Sprinkler" , "watts" : "11"},
+            { "appliance" : "Microwave Oven" , "watts" : "1500"},
+            { "appliance" : "Monitor" , "watts" : "84"},
+            { "appliance" : "Pool Pump" , "watts" : "1000"},
+            { "appliance" : "Portable Spa" , "watts" : "4350"},
+            { "appliance" : "Printer (inkjet)" , "watts" : "13"},
+            { "appliance" : "Printer (laser)" , "watts" : "250"},
+            { "appliance" : "Printer/Fax/multi-function device (inkjet)" , "watts" : "18"},
+            { "appliance" : "Receiver" , "watts" : "28"},
+            { "appliance" : "Rechargeable Power Tool" , "watts" : "13"},
+            { "appliance" : "Refrigerator-Freezer" , "watts" : "999999"},
+            { "appliance" : "Router/DSL/Cable Model" , "watts" : "6"},
+            { "appliance" : "Television set-top box" , "watts" : "20"},
+            { "appliance" : "Slow cooker" , "watts" : "200"},
+            { "appliance" : "Space Heater" , "watts" : "1320"},
+            { "appliance" : "Stereo Systems" , "watts" : "33"},
+            { "appliance" : "Television, Analog, &lt;40 inch" , "watts" : "86"},
+            { "appliance" : "Television, Analog, &gt;40 inch" , "watts" : "156"},
+            { "appliance" : "Television, Digital, ED/HD TV, &lt;40 inch" , "watts" : "150"},
+            { "appliance" : "Television, Digital, ED/HD TV, &gt;40 inch" , "watts" : "234"},
+            { "appliance" : "Toaster  " , "watts" : "1100"},
+            { "appliance" : "Toaster Oven" , "watts" : "1051"},
+            { "appliance" : "Torchiere Lamp-Halogen" , "watts" : "300"},
+            { "appliance" : "Television, CRT - Projection" , "watts" : "225"},
+            { "appliance" : "Television, CRT" , "watts" : "60"},
+            { "appliance" : "Television, DLP" , "watts" : "175"},
+            { "appliance" : "Television, LCD" , "watts" : "150"},
+            { "appliance" : "Television, Plasma" , "watts" : "300"},
+            { "appliance" : "Vacuum" , "watts" : "542"},
+            { "appliance" : "Video Game System" , "watts" : "36"},
+            { "appliance" : "Water Heater-Family of 2" , "watts" : "4500"},
+            { "appliance" : "Water Heater-Family of 4" , "watts" : "4500"},
+            { "appliance" : "Waterbed Heater" , "watts" : "350"},
+            { "appliance" : "Well Pump" , "watts" : "725"}
+        ]
+    }
+</script>
+
+<script id="state-data"  type="application/json">
+    {
+        "states" : [
+            { "code" : "AL" , "state" : "Alabama" },
+            { "code" : "AK" , "state" : "Alaska" },
+            { "code" : "AZ" , "state" : "Arizona" },
+            { "code" : "AR" , "state" : "Arkansas" },
+            { "code" : "CA" , "state" : "California" },
+            { "code" : "CO" , "state" : "Colorado" },
+            { "code" : "CT" , "state" : "Connecticut" },
+            { "code" : "DE" , "state" : "Delaware" },
+            { "code" : "FL" , "state" : "Florida" },
+            { "code" : "GA" , "state" : "Georgia" },
+            { "code" : "HI" , "state" : "Hawaii" },
+            { "code" : "ID" , "state" : "Idaho" },
+            { "code" : "IL" , "state" : "Illinois" },
+            { "code" : "IN" , "state" : "Indiana" },
+            { "code" : "IA" , "state" : "Iowa" },
+            { "code" : "KS" , "state" : "Kansas" },
+            { "code" : "KY" , "state" : "Kentucky" },
+            { "code" : "LA" , "state" : "Louisiana" },
+            { "code" : "ME" , "state" : "Maine" },
+            { "code" : "MD" , "state" : "Maryland" },
+            { "code" : "MA" , "state" : "Massachusetts" },
+            { "code" : "MI" , "state" : "Michigan" },
+            { "code" : "MN" , "state" : "Minnesota" },
+            { "code" : "MS" , "state" : "Mississippi" },
+            { "code" : "MO" , "state" : "Missouri" },
+            { "code" : "MT" , "state" : "Montana" },
+            { "code" : "NE" , "state" : "Nebraska" },
+            { "code" : "NV" , "state" : "Nevada" },
+            { "code" : "NH" , "state" : "New Hampshire" },
+            { "code" : "NJ" , "state" : "New Jersey" },
+            { "code" : "NM" , "state" : "New Mexico" },
+            { "code" : "NY" , "state" : "New York" },
+            { "code" : "NC" , "state" : "North Carolina" },
+            { "code" : "ND" , "state" : "North Dakota" },
+            { "code" : "OH" , "state" : "Ohio" },
+            { "code" : "OK" , "state" : "Oklahoma" },
+            { "code" : "OR" , "state" : "Oregon" },
+            { "code" : "PA" , "state" : "Pennsylvania" },
+            { "code" : "RI" , "state" : "Rhode Island" },
+            { "code" : "SC" , "state" : "South Carolina" },
+            { "code" : "SD" , "state" : "South Dakota" },
+            { "code" : "TN" , "state" : "Tennessee" },
+            { "code" : "TX" , "state" : "Texas" },
+            { "code" : "UT" , "state" : "Utah" },
+            { "code" : "VT" , "state" : "Vermont" },
+            { "code" : "VA" , "state" : "Virginia" },
+            { "code" : "WA" , "state" : "Washington" },
+            { "code" : "WV" , "state" : "West Virginia" },
+            { "code" : "WI" , "state" : "Wisconsin" },
+            { "code" : "WY" , "state" : "Wyoming" }
+        ]
+    }
+</script>
+
 <script>
 $(document).ready(function(){
-    // eia api 4A8DA35AF7501244A974E9603C4FF11B
+
+    // DOM caching
+    var $controls  = $('.form-control')
+      , $appliances = $('#appliances')
+      , $watts     = $('#watts')
+      , $hours     = $('#hours')
+      , $days      = $('#days')
+      , $states     = $('#states')
+      , $energy    = $('#energy')
+      , $cost      = $('#cost')
+
+    // set up our templating
+    applianceTmplSrc = $('#appliance-template').html()
+    applianceTemplate = Handlebars.compile( applianceTmplSrc )
+    applianceHtml = applianceTemplate( JSON.parse( $('#appliance-data').html() ) )
+    $appliances.append( applianceHtml )
+
+    // prevent FOUC
+    $appliances.wrap( function() {
+        var h = $( this ).css('height')
+        return '<div style="height: ' + h + '" class="fouc-placeholder"></div>'
+    })
+
+    $appliances.addClass('selectpicker')
+    $appliances.removeClass('invisible')
+
+    stateTmplSrc = $('#state-template').html()
+    stateTemplate = Handlebars.compile( stateTmplSrc )
+    stateHtml = stateTemplate( JSON.parse( $('#state-data').html() ) )
+    $states.append( stateHtml )
+
+    $states.wrap( function() {
+        var h = $( this ).css('height')
+        return '<div style="height: ' + h + '" class="fouc-placeholder"></div>'
+    })
+
+    $states.addClass('selectpicker')
+    $states.removeClass('invisible')
+
+
+    var apiConfig = {
+        url: 'http://api.eia.gov/series/'
+      , api_key: '4A8DA35AF7501244A974E9603C4FF11B'
+      , series_id: 'ELEC.PRICE.XX-RES.Q'
+    }
+
 
     // convenience variables
     var energy = 0
-      , cost   = 0;
+      , cost   = 0
 
-    // DOM caching
-    var $controls = $('.form-control')
-      , $watts    = $('#watts')
-      , $hours    = $('#hours')
-      , $days     = $('#days')
-      , $rate     = $('#rate')
-      , $energy   = $('#energy')
-      , $cost     = $('#cost');
+
 
     // functions
     var recalculate = function(){
-        var completed = false;
+        var completed = false
 
         $controls.each( function(){
-            return (completed = $(this).val() ? true : false);
+            return (completed = $(this).val() ? true : false)
         });
 
-        if(completed) {
-            energy = $watts.val() * $hours.val() *  $days.val();
-            cost = energy * $rate.val();
-            $energy.html(  energy + ' kWh');
-            $cost.html( '$' + cost );
+        if (completed) {
+            energy = $watts.val() * $hours.val() *  $days.val()
+            cost = energy * $rate.val()
+            $energy.html(  energy + ' kWh')
+            $cost.html( '$' + cost )
         }
-    };
+    }
+
+
+    var getStateRate = function( state ){
+
+        var opt = state.selectedIndex
+          , stcode = state[ opt ].dataset.stCode
+          , series_id = apiConfig.series_id.replace( 'XX', stcode )
+
+        return $.ajax({
+            type: 'GET'
+          , dataType: 'json'
+          , url: apiConfig.url
+          , data: {
+                api_key: apiConfig.api_key
+              , series_id: series_id
+            }
+        });
+
+    }
+
+
+
+    $states.on( 'change', function( event ){
+
+        var x = getStateRate( event.currentTarget )
+        console.log(x)
+
+    })
+
+
+
+    $('#appliances').on( 'change', function(e){
+        //console.log(e.currentTarget.value)
+        $watts.val(e.currentTarget.value)
+    })
 
     // Event handlers
-    $controls.on( 'change', recalculate);
+    $controls.on( 'change', recalculate)
 
 });
 
