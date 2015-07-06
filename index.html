@@ -3,128 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Appliance Energy Calculator</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="all">
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.min.css" rel="stylesheet" media="all">
 
+    <link href="client/css/styles.css" rel="stylesheet">
 
-    <style>
-        body {
-            padding-top: 2em;
-        }
-        .title {
-            background-color: #89c800;
-            color: #000;
-            font-size: 18px;
-            padding-bottom: 6px;
-            padding-top: 6px;
-            text-align: center;
-            text-transform: uppercase;
 
-        }
-        .input-group-addon .fa {
-            width:27px;
-        }
-        .input-group {
-            background-color: #00162d;
-            border-bottom: 1px solid #fff;
-        }
-        .input-group.active {
-            background-color: #002e5d;
-
-        }
-        .input-group.active .input-group-addon {
-            background-color: #002e5d;
-            border-left: 8px solid #009ff1;
-            color: #009ff1;
-        }
-
-        .input-group-addon {
-            background-color: #00162d;
-            border: none;
-            border-left: 8px solid #00162d;
-            color: #0051a4;
-            font-size: 26px;
-            min-width:40px;
-            text-align: center;
-            /*width: 60px;*/
-        }
-        .input-group label {
-            padding-top: 12px;
-        }
-        span.caret {
-            color:red !important;
-        }
-        label {
-            color: #50820a;
-            font-size: 14px;
-            font-weight: normal;
-            margin-bottom: 0;
-            padding-left: 12px;
-        }
-        select,
-        .form-control,
-        select.form-control {
-            background-color: transparent;
-            border: 0;
-            box-shadow: none;
-            border-top-left-radius:0;
-            border-bottom-left-radius:0;
-            -webkit-border-radius: 0 !important;
-            -moz-border-radius: 0 !important;
-            border-radius: 0 !important;
-        }
-        * {
-            -webkit-border-radius: 0 !important;
-            -moz-border-radius: 0 !important;
-            border-radius: 0 !important;
-        }
-        .bootstrap-select .btn {
-            background-color: transparent;
-            border: 0;
-            box-shadow: none;
-            color: #fff;
-            padding-top: 0;
-        }
-        .dropdown-menu {
-            background-color: #002E5D;
-        }
-        .dropdown-menu > li > a {
-            border-left: 8px solid #002E5D;
-            color: #fff;
-        }
-        .dropdown-menu>li>a:hover,
-        .dropdown-menu>li>a:focus {
-            background-color: #00162D;
-            border-left: 8px solid #009FF1;
-            color: #fff;
-        }
-
-        .btn-group.open .dropdown-toggle {
-            background-color: transparent;
-            color: #FFF;
-        }
-        .btn-default .caret {
-            border-bottom-color: #fff;
-            border-top-color: #fff;
-        }
-        .bootstrap-select.btn-group .dropdown-menu {
-            left: -60px;
-            right: -1px;
-        }
-        .results {
-            color: #fff;
-            background-color: #000;
-            min-height: 60px;
-            padding: 7px;
-            text-align: center;
-
-        }
-
-    </style>
 </head>
 <body>
 
@@ -132,6 +20,7 @@
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
+<div id="app">
             <div class="title">Appliance Energy Calculator</div>
 
 <div class="input-group">
@@ -141,7 +30,8 @@
         id="appliances"
         class="form-control"
         aria-describedby="watts-addon"
-        data-live-search="true">
+        data-live-search="true"
+        data-live-search-placeholder="Search the appliance list">
     </select>
 </div>
 
@@ -153,7 +43,7 @@
 </div>
 
 
-<div class="input-group states-group     active">
+<div class="input-group states-group">
     <span class="input-group-addon" id="state-addon"><i class="fa fa-money"></i></span>
     <label for="states">Utility rate</label>
     <select
@@ -164,7 +54,7 @@
 </div>
 
 
-<div class="input-group hours-group      active">
+<div class="input-group hours-group">
     <span class="input-group-addon" id="hours-addon"><i class="fa fa-clock-o"></i></span>
     <label for="hours">Hours used per day</label>
     <input id="hours" class="form-control" aria-describedby="hours-addon">
@@ -185,6 +75,7 @@
         <div class="data" id="cost"></div>
     </div>
 </div>
+    </div><!-- /app -->
 
         </div>
     </div>
@@ -257,10 +148,10 @@
             { "appliance" : "Slow cooker" , "watts" : "200"},
             { "appliance" : "Space Heater" , "watts" : "1320"},
             { "appliance" : "Stereo Systems" , "watts" : "33"},
-            { "appliance" : "Television, Analog, &lt;40 inch" , "watts" : "86"},
-            { "appliance" : "Television, Analog, &gt;40 inch" , "watts" : "156"},
-            { "appliance" : "Television, Digital, ED/HD TV, &lt;40 inch" , "watts" : "150"},
-            { "appliance" : "Television, Digital, ED/HD TV, &gt;40 inch" , "watts" : "234"},
+            { "appliance" : "Television, Analog, <40 inch" , "watts" : "86"},
+            { "appliance" : "Television, Analog, >40 inch" , "watts" : "156"},
+            { "appliance" : "Television, Digital, ED/HD TV, <40 inch" , "watts" : "150"},
+            { "appliance" : "Television, Digital, ED/HD TV, >40 inch" , "watts" : "234"},
             { "appliance" : "Toaster  " , "watts" : "1100"},
             { "appliance" : "Toaster Oven" , "watts" : "1051"},
             { "appliance" : "Torchiere Lamp-Halogen" , "watts" : "300"},
@@ -340,14 +231,15 @@
 $(document).ready(function(){
 
     // DOM caching
-    var $controls  = $('.form-control')
+    var $controls = $('.form-control')
+      , $inputgroups = $('.input-group')
       , $appliances = $('#appliances')
-      , $watts     = $('#watts')
-      , $hours     = $('#hours')
-      , $days      = $('#days')
-      , $states     = $('#states')
-      , $energy    = $('#energy')
-      , $cost      = $('#cost')
+      , $watts= $('#watts')
+      , $hours= $('#hours')
+      , $days = $('#days')
+      , $states= $('#states')
+      , $energy = $('#energy')
+      , $cost = $('#cost')
 
     // set up our templating
     applianceTmplSrc = $('#appliance-template').html()
@@ -378,6 +270,7 @@ $(document).ready(function(){
     $states.removeClass('invisible')
 
 
+
     var apiConfig = {
         url: 'http://api.eia.gov/series/'
       , api_key: '4A8DA35AF7501244A974E9603C4FF11B'
@@ -389,7 +282,11 @@ $(document).ready(function(){
     var energy = 0
       , cost   = 0
 
-
+    // handle focus/active state visuals
+    var setActiveState = function($group){
+        $inputgroups.removeClass('active')
+        $group.addClass('active')
+    }
 
     // functions
     var recalculate = function(){
@@ -431,19 +328,42 @@ $(document).ready(function(){
     $states.on( 'change', function( event ){
 
         var x = getStateRate( event.currentTarget )
-        console.log(x)
+        console.log('states change event' , x)
 
     })
 
 
-
-    $('#appliances').on( 'change', function(e){
-        //console.log(e.currentTarget.value)
-        $watts.val(e.currentTarget.value)
+    /**
+     *
+     *  When the user changes the appliance, change the wattage to match the appliance
+     *
+     */
+    $('#appliances').on( 'change', function(event){
+        console.log( 'setting watts to ' , event.currentTarget.value )
+        $watts.val( event.currentTarget.value )
     })
 
-    // Event handlers
-    $controls.on( 'change', recalculate)
+    /**
+     *
+     *  When the user changes any control, recalculate the totals
+     *  Delegate the binding for bootstrap-select
+     */
+    $('#app').on( 'change', '.form-control', function(event){
+        console.log('Change event on #' + event.currentTarget.id )
+        recalculate( event.currentTarget )
+    })
+
+
+    /**
+     *
+     *  When the user focuses on any control, highlight the whole parent group visually
+     *  Delegate the binding for bootstrap-select
+     */
+    $('#app').on( 'focus', '.form-control', function(event){
+        var $group = $(event.currentTarget).parents('.input-group')
+
+        setActiveState($group)
+    })
 
 });
 

@@ -1,0 +1,161 @@
+
+
+        @font-face{
+            font-family:"Avenir LT W02 35 Light";
+            src:local("â˜º"),
+            url(client/fonts/avenir_light.woff) format("woff"),
+            url(client/fonts/Avenir+35+Light.ttf) format("truetype"),
+            url(client/fonts/avenir_light.svg) format("svg");
+        }
+
+
+        body {
+            padding-top: 2em;
+            font-family: 'Avenir LT W02 35 Light';
+        }
+        .title {
+            background-color: #89c800;
+            color: #000;
+            font-size: 18px;
+            padding-bottom: 6px;
+            padding-top: 6px;
+            text-align: center;
+            text-transform: uppercase;
+
+        }
+        .input-group-addon .fa {
+            width:27px;
+        }
+        .input-group {
+            background-color: #00162d;
+            border-bottom: 1px solid #fff;
+        }
+        .input-group.active {
+            background-color: #002e5d;
+
+        }
+
+        .input-group.active .input-group-addon {
+            background-color: #002e5d;
+            border-left: 8px solid #009ff1;
+            color: #009ff1;
+        }
+
+        .input-group.active label {
+            color: #89c800;
+        }
+
+        .input-group-addon {
+            background-color: #00162d;
+            border: none;
+            border-left: 8px solid #00162d;
+            color: #0051a4;
+            font-size: 26px;
+            min-width:40px;
+            text-align: center;
+        }
+        .input-group label {
+            padding-top: 12px;
+        }
+
+        label {
+            color: #50820a;
+            font-size: 14px;
+            font-weight: normal;
+            margin-bottom: 0;
+            padding-left: 12px;
+        }
+        select,
+        .form-control,
+        select.form-control {
+            background-color: transparent;
+            border: 0;
+            box-shadow: none;
+            border-top-left-radius:0;
+            border-bottom-left-radius:0;
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .bootstrap-select .btn {
+            background-color: transparent;
+            border: 0;
+            box-shadow: none;
+            color: #fff;
+            font-size: 22px;
+            padding-top: 0;
+        }
+        .dropdown-menu {
+            background-color: #002E5D;
+            margin-top: 0;
+            padding: 0;
+        }
+        .dropdown-menu > li {
+            border-bottom: 1px solid #fff;
+        }
+        .dropdown-menu > li > a {
+            border-left: 8px solid #002E5D;
+            color: #fff;
+            font-size: 22px;
+            height: 44px;
+            line-height: 44px;
+        }
+        .dropdown-menu>li>a:hover,
+        .dropdown-menu>li>a:focus {
+            background-color: #00162D;
+            border-left: 8px solid #009FF1;
+            color: #fff;
+        }
+        .dropdown-menu>.active>a,
+        .dropdown-menu>.active>a:hover,
+        .dropdown-menu>.active>a:focus {
+            background-color: #00162D;
+            border-left: 8px solid #009FF1;
+            color: #fff;
+        }
+        .btn-group.open .dropdown-toggle {
+            background-color: transparent;
+            color: #fff;
+        }
+        .btn-default .caret {
+            border-bottom-color: #fff;
+            border-top-color: #fff;
+        }
+
+        .bootstrap-select.btn-group .dropdown-menu {
+            left: -60px;
+            right: -1px;
+        }
+
+        .bootstrap-select .dropdown-toggle:focus {
+            outline: 0 !important;
+        }
+        .form-control:focus,
+        .btn-group.open .dropdown-toggle {
+            box-shadow: none;
+        }
+
+        .bs-searchbox .form-control {
+            background-color: #EFEFEF;
+            color: #000;
+        }
+        .bs-searchbox + .dropdown-menu {
+            background-color: #002E5D;
+        }
+        .results {
+            background-color: #eaeaea;
+            border: 8px solid #009ff1;
+            color: #002e5d;
+            font-size: 45px;
+            min-height: 235px;
+            padding: 7px;
+            text-align: center;
+        }
+        .results .header {
+            font-size: 18px;
+            padding-top: 1em;
+            text-transform: uppercase;
+        }
