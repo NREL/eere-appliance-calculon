@@ -25,19 +25,35 @@
             text-transform: uppercase;
 
         }
+        .input-group-addon .fa {
+            width:27px;
+        }
         .input-group {
-            background-color: #002e5d;
+            background-color: #00162d;
             border-bottom: 1px solid #fff;
         }
-        .input-group-addon {
+        .input-group.active {
             background-color: #002e5d;
-            border: none;
+
+        }
+        .input-group.active .input-group-addon {
+            background-color: #002e5d;
             border-left: 8px solid #009ff1;
+            color: #009ff1;
+        }
+
+        .input-group-addon {
+            background-color: #00162d;
+            border: none;
+            border-left: 8px solid #00162d;
             color: #0051a4;
             font-size: 26px;
             min-width:40px;
             text-align: center;
             /*width: 60px;*/
+        }
+        .input-group label {
+            padding-top: 12px;
         }
         span.caret {
             color:red !important;
@@ -52,7 +68,7 @@
         select,
         .form-control,
         select.form-control {
-            background-color: #002e5d;
+            background-color: transparent;
             border: 0;
             box-shadow: none;
             border-top-left-radius:0;
@@ -67,11 +83,37 @@
             border-radius: 0 !important;
         }
         .bootstrap-select .btn {
-            background-color: #002e5d;
+            background-color: transparent;
             border: 0;
             box-shadow: none;
             color: #fff;
             padding-top: 0;
+        }
+        .dropdown-menu {
+            background-color: #002E5D;
+        }
+        .dropdown-menu > li > a {
+            border-left: 8px solid #002E5D;
+            color: #fff;
+        }
+        .dropdown-menu>li>a:hover,
+        .dropdown-menu>li>a:focus {
+            background-color: #00162D;
+            border-left: 8px solid #009FF1;
+            color: #fff;
+        }
+
+        .btn-group.open .dropdown-toggle {
+            background-color: transparent;
+            color: #FFF;
+        }
+        .btn-default .caret {
+            border-bottom-color: #fff;
+            border-top-color: #fff;
+        }
+        .bootstrap-select.btn-group .dropdown-menu {
+            left: -60px;
+            right: -1px;
         }
         .results {
             color: #fff;
@@ -81,15 +123,7 @@
             text-align: center;
 
         }
-        .results .results-row {
-            display: table;
-            width: 100%;
-        }
-        .results .results-row .data {
-            display: table-cell;
-            font-size: 1.5em;
-            width: 50%
-        }
+
     </style>
 </head>
 <body>
@@ -115,11 +149,11 @@
 <div class="input-group watts-group">
     <span class="input-group-addon" id="watts-addon"><i class="fa fa-bolt"></i></span>
     <label for="watts">Wattage</label>
-    <input id="watts" type="number" class="form-control" aria-describedby="watts-addon" value="">
+    <input id="watts" class="form-control" aria-describedby="watts-addon" value="">
 </div>
 
 
-<div class="input-group states-group">
+<div class="input-group states-group     active">
     <span class="input-group-addon" id="state-addon"><i class="fa fa-money"></i></span>
     <label for="states">Utility rate</label>
     <select
@@ -130,22 +164,22 @@
 </div>
 
 
-<div class="input-group hours-group">
+<div class="input-group hours-group      active">
     <span class="input-group-addon" id="hours-addon"><i class="fa fa-clock-o"></i></span>
     <label for="hours">Hours used per day</label>
-    <input id="hours" type="number" class="form-control" aria-describedby="hours-addon">
+    <input id="hours" class="form-control" aria-describedby="hours-addon">
 </div>
 
 
 <div class="input-group days-group">
     <span class="input-group-addon" id="days-addon"><i class="fa fa-calendar"></i></span>
     <label for="days">Days used per year</label>
-    <input id="days" type="number" class="form-control" aria-describedby="days-addon">
+    <input id="days" class="form-control" aria-describedby="days-addon">
 </div>
 
 
 <div class="results">
-    <div class="header">My annual energy per year</div>
+    <div class="header">Energy use and cost per year</div>
     <div class="results-row">
         <div class="data" id="energy"></div>
         <div class="data" id="cost"></div>
