@@ -48,6 +48,7 @@
     <select
         id="states"
         class="form-control"
+        data-show-subtext="true"
         aria-describedby="state-addon">
     </select>
 </div>
@@ -98,9 +99,10 @@
 </script>
 
 <script id="state-template" type="text/x-handlebars-template">
-    {{! Values are added later via AJAX on demand }}
+    {{! value and subtext are added later via AJAX on demand }}
+    <option value="12" data-subtext="$0.12/kWh" data-state-code="{{code}}">US Average</option>
     {{#each states}}
-    <option value="" data-state-code="{{code}}">{{state}}</option>
+    <option value="" data-subtext="" data-state-code="{{code}}">{{state}}</option>
     {{/each}}
 </script>
 
