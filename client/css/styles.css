@@ -3,9 +3,9 @@
         @font-face{
             font-family:"Avenir LT W02 35 Light";
             src:local("â˜º"),
-            url(client/fonts/avenir_light.woff) format("woff"),
-            url(client/fonts/Avenir+35+Light.ttf) format("truetype"),
-            url(client/fonts/avenir_light.svg) format("svg");
+            url(../fonts/avenir_light.woff) format("woff"),
+            url(../fonts/Avenir+35+Light.ttf) format("truetype"),
+            url(../fonts/avenir_light.svg) format("svg");
         }
 
 
@@ -45,6 +45,12 @@
             color: #89c800;
         }
 
+        .input-group.active .bootstrap-select .btn,
+        .input-group.active .form-control {
+            color: #fff;
+        }
+
+
         .input-group-addon {
             background-color: #00162d;
             border: none;
@@ -76,7 +82,7 @@
             -webkit-border-radius: 0 !important;
             -moz-border-radius: 0 !important;
             border-radius: 0 !important;
-            color: #fff;
+            color: #a3a3a3;
             font-size: 22px;
         }
 
@@ -84,7 +90,7 @@
             background-color: transparent;
             border: 0;
             box-shadow: none;
-            color: #fff;
+            color: #a3a3a3;
             font-size: 22px;
             padding-top: 0;
         }
@@ -129,7 +135,9 @@
             left: -60px;
             right: -1px;
         }
-
+        .bootstrap-select small.text-muted {
+            padding-left: 0.5em;
+        }
         .bootstrap-select .dropdown-toggle:focus {
             outline: 0 !important;
         }
