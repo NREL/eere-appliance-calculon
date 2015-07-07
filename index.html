@@ -21,15 +21,15 @@
         <div class="col-sm-4 col-sm-offset-4">
 
 <div id="app">
-            <div class="title">Appliance Energy Calculator</div>
+<div class="title">Appliance Energy Calculator</div>
 
 <div class="input-group">
+<div class="input-group active">
     <span class="input-group-addon" id="watts-addon"><i class="fa fa-lightbulb-o"></i></span>
     <label for="appliances">My appliance</label>
     <select
         id="appliances"
         class="form-control"
-        aria-describedby="watts-addon"
         data-live-search="true"
         data-live-search-placeholder="Search the appliance list">
     </select>
@@ -39,7 +39,7 @@
 <div class="input-group watts-group">
     <span class="input-group-addon" id="watts-addon"><i class="fa fa-bolt"></i></span>
     <label for="watts">Wattage</label>
-    <input id="watts" class="form-control" aria-describedby="watts-addon" value="">
+    <input id="watts" class="form-control" value="24">
 </div>
 
 
@@ -57,14 +57,14 @@
 <div class="input-group hours-group">
     <span class="input-group-addon" id="hours-addon"><i class="fa fa-clock-o"></i></span>
     <label for="hours">Hours used per day</label>
-    <input id="hours" class="form-control" aria-describedby="hours-addon">
+    <input id="hours" class="form-control" value="0">
 </div>
 
 
 <div class="input-group days-group">
     <span class="input-group-addon" id="days-addon"><i class="fa fa-calendar"></i></span>
     <label for="days">Days used per year</label>
-    <input id="days" class="form-control" aria-describedby="days-addon">
+    <input id="days" class="form-control" value="0">
 </div>
 
 
