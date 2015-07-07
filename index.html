@@ -20,62 +20,63 @@
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
-<div id="app">
-<div class="title">Appliance Energy Calculator</div>
+            <div id="app">
+                <div class="title">Appliance Energy Calculator</div>
 
-<div class="input-group active">
-    <span class="input-group-addon" id="watts-addon"><i class="fa fa-lightbulb-o"></i></span>
-    <label for="appliances">My appliance</label>
-    <select
-        id="appliances"
-        class="form-control"
-        data-live-search="true"
-        data-live-search-placeholder="Search the appliance list">
-    </select>
-</div>
-
-
-<div class="input-group watts-group">
-    <span class="input-group-addon" id="watts-addon"><i class="fa fa-bolt"></i></span>
-    <label for="watts">Wattage</label>
-    <input id="watts" class="form-control integer-input" value="24" type="number" min="0" step="1">
-</div>
+                <div class="input-group active">
+                    <span class="input-group-addon" id="watts-addon"><i class="fa fa-lightbulb-o"></i></span>
+                    <label for="appliances">My appliance</label>
+                    <select
+                        id="appliances"
+                        class="form-control"
+                        data-live-search="true"
+                        data-live-search-placeholder="Search the appliance list">
+                    </select>
+                </div>
 
 
-<div class="input-group states-group">
-    <span class="input-group-addon" id="state-addon"><i class="fa fa-money"></i></span>
-    <label for="states">Utility rate</label>
-    <select
-        id="states"
-        class="form-control"
-        data-show-subtext="true"
-        aria-describedby="state-addon">
-    </select>
-</div>
+                <div class="input-group watts-group">
+                    <span class="input-group-addon" id="watts-addon"><i class="fa fa-bolt"></i></span>
+                    <label for="watts">Wattage</label>
+                    <input id="watts" class="form-control integer-input" value="24" type="number" min="0" step="1">
+                </div>
 
 
-<div class="input-group hours-group">
-    <span class="input-group-addon" id="hours-addon"><i class="fa fa-clock-o"></i></span>
-    <label for="hours">Hours used per day</label>
-    <input id="hours" class="form-control integer-input" value="0" type="number" min="0" step="1">
-</div>
+                <div class="input-group states-group">
+                    <span class="input-group-addon" id="state-addon"><i class="fa fa-money"></i></span>
+                    <label for="states">Utility rate</label>
+                    <select
+                        id="states"
+                        class="form-control"
+                        data-show-subtext="true"
+                        aria-describedby="state-addon">
+                    </select>
+                </div>
 
 
-<div class="input-group days-group">
-    <span class="input-group-addon" id="days-addon"><i class="fa fa-calendar"></i></span>
-    <label for="days">Days used per year</label>
-    <input id="days" class="form-control integer-input" value="0" type="number" min="0" step="1">
-</div>
+                <div class="input-group hours-group">
+                    <span class="input-group-addon" id="hours-addon"><i class="fa fa-clock-o"></i></span>
+                    <label for="hours">Hours used per day</label>
+                    <input id="hours" class="form-control integer-input" value="0" type="number" min="0" step="1">
+                </div>
 
 
-<div class="results">
-    <div class="header">Energy use and cost per year</div>
-    <div class="results-row">
-        <div class="data" id="energy"></div>
-        <div class="data" id="cost"></div>
-    </div>
-</div>
-    </div><!-- /app -->
+                <div class="input-group days-group">
+                    <span class="input-group-addon" id="days-addon"><i class="fa fa-calendar"></i></span>
+                    <label for="days">Days used per year</label>
+                    <input id="days" class="form-control integer-input" value="0" type="number" min="0" step="1">
+                </div>
+
+
+                <div class="results">
+                    <div class="header">Energy use and cost per year</div>
+                    <div class="results-row">
+                        <div class="data" id="energy"></div>
+                        <div class="data" id="cost"></div>
+                    </div>
+                </div>
+
+            </div><!-- /app -->
 
         </div>
     </div>
@@ -89,6 +90,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.min.js"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+<!-- End Libraries -->
 
 
 <!-- Templates -->
@@ -105,6 +107,7 @@
     <option value="" data-subtext="" data-state-code="{{code}}">{{state}}</option>
     {{/each}}
 </script>
+<!-- End Templates -->
 
 <!-- Data -->
 <script id="appliance-data"  type="application/json">
@@ -227,192 +230,10 @@
         ]
     }
 </script>
+<!-- End Data -->
 
-<script>
-$(document).ready(function(){
-
-    // DOM caching
-    var $controls = $('.form-control')
-      , $inputgroups = $('.input-group')
-      , $appliances = $('#appliances')
-      , $watts= $('#watts')
-      , $hours= $('#hours')
-      , $days = $('#days')
-      , $states = $('#states')
-      , $energy = $('#energy')
-      , $cost = $('#cost')
-      , $integers = $('.integer-input')
-
-
-    // set up our templating
-    applianceTmplSrc = $('#appliance-template').html()
-    applianceTemplate = Handlebars.compile( applianceTmplSrc )
-    applianceHtml = applianceTemplate( JSON.parse( $('#appliance-data').html() ) )
-    $appliances.append( applianceHtml )
-
-
-    // prevent FOUC
-    $appliances.wrap( function() {
-        var h = $( this ).css('height')
-        return '<div style="height: ' + h + '" class="fouc-placeholder"></div>'
-    })
-
-    $appliances.addClass('selectpicker')
-    $appliances.removeClass('invisible')
-
-    stateTmplSrc = $('#state-template').html()
-    stateTemplate = Handlebars.compile( stateTmplSrc )
-    stateHtml = stateTemplate( JSON.parse( $('#state-data').html() ) )
-    $states.append( stateHtml )
-
-    $states.wrap( function() {
-        var h = $( this ).css('height')
-        return '<div style="height: ' + h + '" class="fouc-placeholder"></div>'
-    })
-
-    $states.addClass('selectpicker')
-    $states.removeClass('invisible')
-
-
-
-    var apiConfig = {
-        url: 'http://api.eia.gov/series/'
-      , api_key: '4A8DA35AF7501244A974E9603C4FF11B'
-      , series_id: 'ELEC.PRICE.XX-RES.Q'
-    }
-
-
-    /**
-     *   Toggle focus/active state visual
-     */
-    var setActiveState = function( $group ){
-        $inputgroups.removeClass('active')
-        $group.addClass('active')
-    }
-
-
-
-    /**
-     *  Calculate energy use and cost in the widget results box
-     */
-    var recalculate = function(){
-        console.log('Recalculating')
-
-        var energy = 0
-          , cost   = 0
-          , completed = false
-
-        $controls.each( function(){
-            return (completed = $(this).val() ? true : false)
-        });
-
-        if (completed) {
-            energy = $watts.val() * $hours.val() *  $days.val()
-            cost = energy * $states.val() / 100 // convert to $
-
-            $energy.html(  energy + ' kWh')
-            $cost.html( '$' + cost )
-        }
-    }
-
-    /**
-     *  Get utility rate data from EIA API
-     */
-    var getStateRate = function( statecode ){
-
-        var series_id = apiConfig.series_id.replace( 'XX', statecode )
-
-        return $.ajax({
-            type: 'GET'
-          , dataType: 'json'
-          , url: apiConfig.url
-          , data: {
-                api_key: apiConfig.api_key
-              , series_id: series_id
-            }
-        });
-
-    }
-
-    /**
-     *  Restrict the type=number <inputs> to integers
-     */
-    $integers.on( 'change', function(event){
-        event.currentTarget.value = Math.round(event.currentTarget.value)
-    })
-
-    /**
-     *  Helper function
-     *  Update DOM option data attr for bootstrap-select
-     */
-    var updateSubtext = function( rate, index ){
-        $states.find('option:eq('+index+')').data('subtext', '$0.'+rate+'/kWh');
-        $states.selectpicker('refresh');
-    }
-
-    /**
-     *  Update the utility rate info displayed in the bootstrap-select dropdown and button
-     */
-    $states.on( 'change', function( event ){
-
-        var state = event.currentTarget
-          , optnum = state.selectedIndex
-          , option = state[ optnum ]
-          , statecode = option.dataset.stateCode
-          , jqxhr = new $.Deferred
-          , rate
-
-        if (!option.value) {
-
-            jqxhr = getStateRate( statecode )
-
-            jqxhr.done( function(results){
-                rate = Math.round( results.series[0].data[0][1] )
-                option.value = rate
-                updateSubtext( rate, optnum )
-                recalculate()
-            })
-
-            jqxhr.fail( function(){ alert('Error fetching rate data')})
-
-        } else {
-            rate = option.value
-            updateSubtext( rate, optnum )
-        }
-
-    })
-
-
-    /**
-     *  When the user changes appliances, update the wattage to match the new appliance
-     */
-    $( '#appliances' ).on( 'change', function( event ){
-        console.log( 'setting watts to ' , event.currentTarget.value )
-        $watts.val( event.currentTarget.value )
-    })
-
-
-    /**
-     *  When the user changes any control, recalculate the totals
-     *  Delegate the binding for bootstrap-select
-     */
-    $( '#app' ).on( 'change', '.form-control', function( event ){
-        recalculate()
-    })
-
-
-    /**
-     *  When the user focuses on any control, highlight the whole parent group visually
-     *  Delegate the binding for bootstrap-select
-     */
-    $( '#app' ).on( 'focus', '.form-control', function( event ){
-        var $group = $(event.currentTarget).parents('.input-group')
-        setActiveState($group)
-    })
-
-});
-
-</script>
+<!-- Application -->
+<script src="client/js/app.js"></script>
 
 
 </body>
