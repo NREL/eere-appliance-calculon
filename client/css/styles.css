@@ -30,6 +30,10 @@
             background-color: #00162d;
             border-bottom: 1px solid #fff;
         }
+
+        /*
+         * active state styles
+         */
         .input-group.active {
             background-color: #002e5d;
 
@@ -60,9 +64,7 @@
             min-width:40px;
             text-align: center;
         }
-        .input-group label {
-            padding-top: 12px;
-        }
+
 
         label {
             color: #50820a;
@@ -70,6 +72,8 @@
             font-weight: normal;
             margin-bottom: 0;
             padding-left: 12px;
+            padding-top: 12px;
+
         }
         select,
         .form-control,
@@ -84,6 +88,7 @@
             border-radius: 0 !important;
             color: #a3a3a3;
             font-size: 22px;
+            line-height: 22px;
         }
 
         .bootstrap-select .btn {
@@ -109,15 +114,15 @@
             height: 44px;
             line-height: 44px;
         }
-        .dropdown-menu>li>a:hover,
-        .dropdown-menu>li>a:focus {
+        .dropdown-menu > li > a:hover,
+        .dropdown-menu > li > a:focus {
             background-color: #00162D;
             border-left: 8px solid #009FF1;
             color: #fff;
         }
-        .dropdown-menu>.active>a,
-        .dropdown-menu>.active>a:hover,
-        .dropdown-menu>.active>a:focus {
+        .dropdown-menu > .active > a,
+        .dropdown-menu > .active > a:hover,
+        .dropdown-menu > .active > a:focus {
             background-color: #00162D;
             border-left: 8px solid #009FF1;
             color: #fff;
