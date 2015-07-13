@@ -87,8 +87,8 @@ select.form-control {
     -moz-border-radius: 0 !important;
     border-radius: 0 !important;
     color: #a3a3a3;
-    font-size: 22px;
-    line-height: 22px;
+    font-size: 18px;
+    line-height: 18px;
 }
 
 .bootstrap-select .btn {
@@ -96,9 +96,21 @@ select.form-control {
     border: 0;
     box-shadow: none;
     color: #a3a3a3;
-    font-size: 22px;
+    font-size: 18px;
     padding-top: 0;
 }
+
+@media (min-width: 768px){
+    select,
+    .form-control,
+    select.form-control,
+    .bootstrap-select .btn,
+    .dropdown-menu > li > a {
+        font-size: 22px;
+        line-height: 22px;
+    }
+}
+
 .dropdown-menu {
     background-color: #002E5D;
     margin-top: 0;
@@ -110,7 +122,7 @@ select.form-control {
 .dropdown-menu > li > a {
     border-left: 8px solid #002E5D;
     color: #fff;
-    font-size: 22px;
+    font-size: 18px;
     height: 44px;
     line-height: 44px;
 }
