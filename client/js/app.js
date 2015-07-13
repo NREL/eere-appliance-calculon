@@ -76,7 +76,7 @@ $(document).ready(function(){
         });
 
         if (completed) {
-            energy = $watts.val() * $hours.val() *  $days.val()
+            energy = $watts.val() * $hours.val() *  $days.val() / 1000 // W->kW conversion
             cost = energy * $states.val() / 100 // convert to $
 
             $energy.html(  energy + ' kWh')
