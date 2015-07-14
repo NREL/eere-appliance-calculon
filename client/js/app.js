@@ -70,14 +70,22 @@ $(document).ready(function(){
         var energy = 0
           , cost   = 0
           , completed = false
+          , watts = $watts.val()
+          , hours = $hours.val()
+          , days = $days.val()
+          , rate = $states.val()
 
         $controls.each( function(){
             return (completed = $(this).val() ? true : false)
         });
 
         if (completed) {
-            energy = $watts.val() * $hours.val() *  $days.val() / 1000 // W->kW conversion
-            cost = energy * $states.val() / 100 // convert to $
+
+            energy = watts * hours *  days / 1000 // convert watts to kilowatts
+            cost = Math.round( energy * rate ) / 100// convert rate from cents to dollars
+
+            console.log('Energy use: '+watts+'W * '+hours+'h/day * '+days+'day/yr * 1kW/1000W = '+energy+'kWh/yr')
+            console.log('Cost: Round( ' +energy+ 'kWh/yr * '+rate+'cents/kWh ) = '+Math.round( energy * rate )+'cents/yr * $1/100cents = $'+cost)
 
             $energy.html(  energy + ' kWh')
             $cost.html( '$' + cost )
@@ -121,6 +129,7 @@ $(document).ready(function(){
 
     /**
      *  Update the utility rate info displayed in the bootstrap-select dropdown and button
+     *  NB: the API returns values as cents per kilowatthour
      */
     $states.on( 'change', function( event ){
 
@@ -131,13 +140,14 @@ $(document).ready(function(){
           , jqxhr = new $.Deferred
           , rate
 
-        if (!option.value) {
+        if ( !option.value ) {
 
             jqxhr = getStateRate( statecode )
 
             jqxhr.done( function(results){
-                rate = Math.round( results.series[0].data[0][1] )
+                rate = Math.round( results.series[0].data[0][1] ) // round our utility rate
                 option.value = rate
+
                 updateSubtext( rate, optnum )
                 recalculate()
             })
