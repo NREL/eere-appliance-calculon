@@ -163,13 +163,17 @@ select.form-control {
     box-shadow: none;
 }
 
-.bs-searchbox .form-control {
+.input-group .bs-searchbox > .form-control {
     background-color: #EFEFEF;
     color: #000;
 }
 .bs-searchbox + .dropdown-menu {
     background-color: #002E5D;
 }
+.bootstrap-select.btn-group .dropdown-menu li.no-results {
+    color: #000;
+}
+
 .results {
     background-color: #eaeaea;
     border: 8px solid #009ff1;
