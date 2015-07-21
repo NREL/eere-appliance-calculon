@@ -10,10 +10,9 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="all">
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.min.css" rel="stylesheet" media="all">
-
+    <!-- build:css client/css/style.min.css -->
     <link href="client/css/styles.css" rel="stylesheet">
-
-
+    <!-- endbuild -->
 </head>
 <body>
 
@@ -98,8 +97,9 @@
 
 <!-- Templates -->
 <script id="appliance-template" type="text/x-handlebars-template">
+    {{! triple mustaches == html decoding }}
     {{#each appliances}}
-    <option value="{{watts}}">{{appliance}}</option>
+    <option value="{{watts}}">{{{appliance}}}</option>
     {{/each}}
 </script>
 
@@ -116,64 +116,62 @@
 <script id="appliance-data"  type="application/json">
     {
         "appliances" : [
-            { "appliance" : "Aquarium Equipment" , "watts" : "24"},
-            { "appliance" : "Boom Box" , "watts" : "8"},
-            { "appliance" : "Cable Box" , "watts" : "140"},
-            { "appliance" : "CD Player" , "watts" : "7"},
-            { "appliance" : "Ceiling Fan (only fan motor)" , "watts" : "35"},
-            { "appliance" : "Clothes Dryer" , "watts" : "999999"},
-            { "appliance" : "Clothes Washer" , "watts" : "999999"},
-            { "appliance" : "Coffee Maker" , "watts" : "1000"},
+            { "appliance" : "Aquarium equipment" , "watts" : "24"},
+            { "appliance" : "Boom box" , "watts" : "8"},
+            { "appliance" : "Cable box" , "watts" : "140"},
+            { "appliance" : "CD player" , "watts" : "7"},
+            { "appliance" : "Ceiling fan" , "watts" : "35"},
+            { "appliance" : "Clothes dryer" , "watts" : "999999"},
+            { "appliance" : "Clothes washer" , "watts" : "999999"},
+            { "appliance" : "Coffee maker" , "watts" : "1000"},
             { "appliance" : "Compactors" , "watts" : "400"},
-            { "appliance" : "Computer - Desktop PC" , "watts" : "75"},
-            { "appliance" : "Computer - Notebook PC" , "watts" : "25"},
-            { "appliance" : "Deep Fryer" , "watts" : "1000"},
-            { "appliance" : "Desktop Computer Monitor" , "watts" : "42"},
+            { "appliance" : "Computer - desktop PC" , "watts" : "75"},
+            { "appliance" : "Computer - notebook PC" , "watts" : "25"},
+            { "appliance" : "Deep fryer" , "watts" : "1000"},
+            { "appliance" : "Desktop computer monitor" , "watts" : "42"},
             { "appliance" : "Dishwasher" , "watts" : "999999"},
             { "appliance" : "DVD/VCR" , "watts" : "17"},
             { "appliance" : "Electric blanket" , "watts" : "400"},
             { "appliance" : "Electronic air cleaner/filter" , "watts" : "50"},
             { "appliance" : "Freezer" , "watts" : "999999"},
-            { "appliance" : "Furnace Fan" , "watts" : "295"},
+            { "appliance" : "Furnace fan" , "watts" : "295"},
             { "appliance" : "Garage door opener" , "watts" : "400"},
-            { "appliance" : "Hair Dryer" , "watts" : "710"},
+            { "appliance" : "Hair dryer" , "watts" : "710"},
             { "appliance" : "Humidifier" , "watts" : "11"},
             { "appliance" : "Iron" , "watts" : "1100"},
-            { "appliance" : "Lawn Sprinkler" , "watts" : "11"},
-            { "appliance" : "Microwave Oven" , "watts" : "1500"},
-            { "appliance" : "Monitor" , "watts" : "84"},
+            { "appliance" : "Lawn sprinkler" , "watts" : "11"},
+            { "appliance" : "Microwave oven" , "watts" : "1500"},
             { "appliance" : "Other" , "watts" : "0"},
-            { "appliance" : "Pool Pump" , "watts" : "1000"},
-            { "appliance" : "Portable Spa" , "watts" : "4350"},
+            { "appliance" : "Pool pump" , "watts" : "1000"},
+            { "appliance" : "Portable spa" , "watts" : "4350"},
             { "appliance" : "Printer (inkjet)" , "watts" : "13"},
             { "appliance" : "Printer (laser)" , "watts" : "250"},
-            { "appliance" : "Printer/Fax/multi-function device (inkjet)" , "watts" : "18"},
+            { "appliance" : "Printer/multi-function" , "watts" : "18"},
             { "appliance" : "Receiver" , "watts" : "28"},
-            { "appliance" : "Rechargeable Power Tool" , "watts" : "13"},
-            { "appliance" : "Refrigerator-Freezer" , "watts" : "999999"},
-            { "appliance" : "Router/DSL/Cable Model" , "watts" : "6"},
-            { "appliance" : "Television set-top box" , "watts" : "20"},
+            { "appliance" : "Rechargeable power tool" , "watts" : "13"},
+            { "appliance" : "Refrigerator-freezer" , "watts" : "999999"},
+            { "appliance" : "Router/DSL/cable modem" , "watts" : "6"},
             { "appliance" : "Slow cooker" , "watts" : "200"},
-            { "appliance" : "Space Heater" , "watts" : "1320"},
-            { "appliance" : "Stereo Systems" , "watts" : "33"},
-            { "appliance" : "Television, Analog, <40 inch" , "watts" : "86"},
-            { "appliance" : "Television, Analog, >40 inch" , "watts" : "156"},
-            { "appliance" : "Television, Digital, ED/HD TV, <40 inch" , "watts" : "150"},
-            { "appliance" : "Television, Digital, ED/HD TV, >40 inch" , "watts" : "234"},
-            { "appliance" : "Toaster  " , "watts" : "1100"},
-            { "appliance" : "Toaster Oven" , "watts" : "1051"},
-            { "appliance" : "Torchiere Lamp-Halogen" , "watts" : "300"},
-            { "appliance" : "Television, CRT - Projection" , "watts" : "225"},
+            { "appliance" : "Space heater" , "watts" : "1320"},
+            { "appliance" : "Stereo systems" , "watts" : "33"},
+            { "appliance" : "Television, analog, <40&quot;" , "watts" : "86"},
+            { "appliance" : "Television, analog, >40&quot;" , "watts" : "156"},
             { "appliance" : "Television, CRT" , "watts" : "60"},
+            { "appliance" : "Television, CRT - projection" , "watts" : "225"},
             { "appliance" : "Television, DLP" , "watts" : "175"},
+            { "appliance" : "Television, ED/HD TV, <40&quot;" , "watts" : "150"},
+            { "appliance" : "Television, ED/HD TV, >40&quot;" , "watts" : "234"},
             { "appliance" : "Television, LCD" , "watts" : "150"},
-            { "appliance" : "Television, Plasma" , "watts" : "300"},
+            { "appliance" : "Television, plasma" , "watts" : "300"},
+            { "appliance" : "Television set-top box" , "watts" : "20"},
+            { "appliance" : "Toaster" , "watts" : "1100"},
+            { "appliance" : "Toaster oven" , "watts" : "1051"},
+            { "appliance" : "Torchiere lamp-halogen" , "watts" : "300"},
             { "appliance" : "Vacuum" , "watts" : "542"},
-            { "appliance" : "Video Game System" , "watts" : "36"},
-            { "appliance" : "Water Heater-Family of 2" , "watts" : "4500"},
-            { "appliance" : "Water Heater-Family of 4" , "watts" : "4500"},
-            { "appliance" : "Waterbed Heater" , "watts" : "350"},
-            { "appliance" : "Well Pump" , "watts" : "725"}
+            { "appliance" : "Video game system" , "watts" : "36"},
+            { "appliance" : "Water heater" , "watts" : "4500"},
+            { "appliance" : "Waterbed heater" , "watts" : "350"},
+            { "appliance" : "Well pump" , "watts" : "725"}
         ]
     }
 </script>
@@ -236,9 +234,9 @@
 </script>
 <!-- End Data -->
 
-<!-- Application -->
+<!-- build:js client/js/app.min.js -->
 <script src="client/js/app.js"></script>
-
+<!-- endbuild -->
 
 </body>
 </html>

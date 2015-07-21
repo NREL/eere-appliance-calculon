@@ -1,3 +1,7 @@
+/**
+ *
+ */
+
 $(document).ready(function(){
 
     // DOM caching
@@ -84,8 +88,8 @@ $(document).ready(function(){
             energy = watts * hours *  days / 1000 // convert watts to kilowatts
             cost = Math.round( energy * rate ) / 100// convert rate from cents to dollars
 
-            console.log('Energy use: '+watts+'W * '+hours+'h/day * '+days+'day/yr * 1kW/1000W = '+energy+'kWh/yr')
-            console.log('Cost: Round( ' +energy+ 'kWh/yr * '+rate+'cents/kWh ) = '+Math.round( energy * rate )+'cents/yr * $1/100cents = $'+cost)
+            //console.log('Energy use: '+watts+'W * '+hours+'h/day * '+days+'day/yr * 1kW/1000W = '+energy+'kWh/yr')
+            //console.log('Cost: Round( ' +energy+ 'kWh/yr * '+rate+'cents/kWh ) = '+Math.round( energy * rate )+'cents/yr * $1/100cents = $'+cost)
 
             $energy.html(  energy + ' kWh')
             $cost.html( '$' + cost )
@@ -137,7 +141,7 @@ $(document).ready(function(){
           , optnum = state.selectedIndex
           , option = state[ optnum ]
           , statecode = option.dataset.stateCode
-          , jqxhr = new $.Deferred
+          , jqxhr = new $.Deferred()
           , rate
 
         if ( !option.value ) {

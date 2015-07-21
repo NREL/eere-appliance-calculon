@@ -1,0 +1,29 @@
+{
+  "name": "eere-appliance-calculon",
+  "version": "1.0.0",
+  "description": "An appliance energy and cost calculator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.nrel.gov/moakley/eere-appliance-calculon.git"
+  },
+  "keywords": [
+    "eere",
+    "appliance",
+    "calculator"
+  ],
+  "author": "Michael Oakley",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.12.3",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-gh-pages": "^0.10.0",
+    "grunt-usemin": "^3.0.0"
+  }
+}
