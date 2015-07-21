@@ -1,5 +1,10 @@
 module.exports = function(grunt) {
 
+
+  var envToUse = grunt.option('env') || 'staging';
+  var env = require('./_environments/' + envToUse + '.js');
+  var s3 = require('./_config/s3.js')
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -72,7 +77,37 @@ module.exports = function(grunt) {
         message: 'Auto-generated commit'
       },
       src: ['**']
-    }
+    },
+
+    // http://www.netorials.com/tutorials/static-websites-amazon-s3-grunt-part-2/
+    'aws_s3': {
+        staging: {
+            options: {
+                accessKeyId: s3.accessKeyId,
+                secretAccessKey: s3.secretAccessKey,
+                bucket: env.s3.bucket,
+                region: env.s3.region,
+                sslEnabled: false
+            },
+            files: [
+                {
+                    expand: true,
+                    dest: 'energysaver/calculator/',
+                    cwd: 'dist',
+                    src: ['**'],
+                    action: 'upload',
+                    differential: true
+                }
+                ,
+                {
+                    dest: 'energysaver/calculator/',
+                    cwd: 'dist/',
+                    action: 'delete',
+                    differential: true
+                }
+            ]
+        }
+    },
   });
 
   grunt.loadNpmTasks('grunt-usemin');
@@ -82,15 +117,24 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-gh-pages');
+  grunt.loadNpmTasks('grunt-aws-s3');
 
-  grunt.registerTask('build', [
-      'default'
-  ]);
+
 
   grunt.registerTask('ghpages', [
       'clean:dist'
     , 'default'
     , 'gh-pages'
+  ]);
+
+  grunt.registerTask('aws:staging', [
+      'clean:dist'
+    , 'build'
+    , 'aws_s3:staging'
+  ]);
+
+  grunt.registerTask('build', [
+      'default'
   ]);
 
   grunt.registerTask('default', [
