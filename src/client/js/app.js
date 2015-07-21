@@ -49,7 +49,7 @@ $(document).ready(function(){
 
 
     var apiConfig = {
-        url: 'http://api.eia.gov/series/'
+        url: '//api.eia.gov/series/'
       , api_key: '4A8DA35AF7501244A974E9603C4FF11B'
       , series_id: 'ELEC.PRICE.XX-RES.Q'
     }
