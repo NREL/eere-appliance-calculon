@@ -65,7 +65,8 @@ module.exports = function(grunt) {
 
     'gh-pages': {
       options: {
-        base: 'dist'
+        base: 'dist',
+        message: 'Auto-generated commit'
       },
       src: ['**']
     }
@@ -79,22 +80,23 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-gh-pages');
 
-  grunt.registerTask('gh-pages', [
-      'gh-pages'
-    , 'copy'
-    , 'useminPrepare'
-    , 'usemin'
-    , 'jshint'
-    , 'uglify'
-    , 'cssmin'
-  ])
+  grunt.registerTask('build', [
+      'default'
+  ]);
+
+  grunt.registerTask('ghpages', [
+      'default'
+    , 'gh-pages'
+  ]);
 
   grunt.registerTask('default', [
       'copy'
     , 'useminPrepare'
-    , 'usemin'
     , 'jshint'
     , 'uglify'
     , 'cssmin'
+    , 'usemin'
   ]);
+
+
 };
