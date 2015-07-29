@@ -174,8 +174,45 @@ $(document).ready(function(){
      *  When the user changes appliances, update the wattage to match the new appliance
      */
     $( '#appliances' ).on( 'change', function( event ){
-        console.log( 'setting watts to ' , event.currentTarget.value )
+
         $watts.val( event.currentTarget.value )
+
+    })
+
+
+    /**
+     *
+     *  Catch the special case - refrigerator
+     *
+     */
+    $('.appliance-group').on('rendered.bs.select', function(){
+
+        var $option
+          , appliance
+          , tooltip
+
+        $option = $(this).find('option:selected')
+
+        if ( $option ) {
+            appliance = $option.text()
+        }
+
+        tooltip = '' +
+            '<i class="fa fa-info-circle small"' +
+              'data-toggle="popover" data-placement="bottom" data-trigger="hover"' +
+              'data-content="Refrigerators cycle on and off. Total time plugged in (usually 24 hours) should be divided by 3 to estimate energy use at maximum wattage.">' +
+            '</i>'
+
+        if ( appliance === "Refrigerator") {
+
+            $(this).find('.filter-option').append( tooltip )
+
+            $('[data-toggle="popover"]').popover()
+
+        }
+
+        $hours.val( 8 )
+
     })
 
 
