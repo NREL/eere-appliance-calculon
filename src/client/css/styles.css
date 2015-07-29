@@ -102,7 +102,7 @@ select.form-control {
     padding-top: 0;
 }
 
-@media (min-width: 768px){
+@media (min-width: 992px){
     select,
     .form-control,
     select.form-control,
@@ -110,6 +110,11 @@ select.form-control {
     .dropdown-menu > li > a {
         font-size: 22px;
         line-height: 22px;
+    }
+}
+@media (min-width: 1200px){
+    small {
+        font-size: 75%; /* override */
     }
 }
 
