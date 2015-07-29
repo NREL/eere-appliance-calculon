@@ -1,8 +1,11 @@
 /**
- *
+ *  Project: EERE Appliance Calculator
+ *  Description: DOM manipulations and calculations
+ *  Author: Michael Oakley <moakley.oakley@nrel.gov>
  */
 
 $(document).ready(function(){
+    'use strict';
 
     // DOM caching
     var $controls = $('.form-control')
@@ -18,9 +21,10 @@ $(document).ready(function(){
 
 
     // set up our templating
-    applianceTmplSrc = $('#appliance-template').html()
-    applianceTemplate = Handlebars.compile( applianceTmplSrc )
-    applianceHtml = applianceTemplate( JSON.parse( $('#appliance-data').html() ) )
+    var applianceTmplSrc = $('#appliance-template').html()
+      , applianceTemplate = Handlebars.compile( applianceTmplSrc )
+      , applianceHtml = applianceTemplate( JSON.parse( $('#appliance-data').html() ) )
+
     $appliances.append( applianceHtml )
 
 
@@ -33,9 +37,9 @@ $(document).ready(function(){
     $appliances.addClass('selectpicker')
     $appliances.removeClass('invisible')
 
-    stateTmplSrc = $('#state-template').html()
-    stateTemplate = Handlebars.compile( stateTmplSrc )
-    stateHtml = stateTemplate( JSON.parse( $('#state-data').html() ) )
+    var stateTmplSrc = $('#state-template').html()
+      , stateTemplate = Handlebars.compile( stateTmplSrc )
+      , stateHtml = stateTemplate( JSON.parse( $('#state-data').html() ) )
     $states.append( stateHtml )
 
     $states.wrap( function() {
@@ -179,7 +183,7 @@ $(document).ready(function(){
      *  When the user changes any control, recalculate the totals
      *  Delegate the binding for bootstrap-select
      */
-    $( '#app' ).on( 'change', '.form-control', function( event ){
+    $( '#app' ).on( 'change', '.form-control', function(){
         recalculate()
     })
 
