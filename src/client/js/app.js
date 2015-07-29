@@ -197,21 +197,24 @@ $(document).ready(function(){
             appliance = $option.text()
         }
 
-        tooltip = '' +
-            '<i class="fa fa-info-circle small"' +
-              'data-toggle="popover" data-placement="bottom" data-trigger="hover"' +
-              'data-content="Refrigerators cycle on and off. Total time plugged in (usually 24 hours) should be divided by 3 to estimate energy use at maximum wattage.">' +
-            '</i>'
-
         if ( appliance === "Refrigerator") {
+
+            tooltip = '' +
+              '<i class="fa fa-info-circle small"' +
+                'data-toggle="popover" data-placement="bottom" data-trigger="hover"' +
+                'data-content="Refrigerators cycle on and off. Total time plugged in (usually 24 hours) should be divided by 3 to estimate energy use at maximum wattage.">' +
+              '</i>'
 
             $(this).find('.filter-option').append( tooltip )
 
             $('[data-toggle="popover"]').popover()
 
+            $hours.val( 8 ) // 24hrs/day / 3 is roughly the time
+
+        } else {
+            $('[data-toggle="popover"]').popover('destroy')
         }
 
-        $hours.val( 8 )
 
     })
 
