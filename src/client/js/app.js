@@ -98,10 +98,11 @@ $(document).ready(function(){
             }
 
             energy = watts * hours *  days / 1000 // convert watts to kilowatts
-            cost = Math.round( energy * rate ) / 100// convert rate from cents to dollars
+            cost = Math.round( energy * rate ) / 100 // convert rate from cents to dollars
 
             $energy.html(  energy + ' kWh')
-            $cost.html( '$' + cost )
+            console.log( 'cost:', cost)
+            $cost.html( '$' + cost.toFixed(2) ) // make sure we have nice dollar figure
         }
     }
 
