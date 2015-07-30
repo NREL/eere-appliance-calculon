@@ -34,7 +34,15 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*!\n'+
+                ' * <%= pkg.name %>\n'+
+                ' * <%= grunt.template.today("dd-mm-yyyy") %>\n'+
+                ' */\n',
+        sourceMap: true,
+        sourceMapName: 'dist/client/js/app.js.map',
+        compress: {
+            drop_console: true
+        }
       },
       dist: {
         files: {
