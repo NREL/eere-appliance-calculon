@@ -71,6 +71,7 @@ $(document).ready(function(){
 
     /**
      *  Calculate energy use and cost in the widget results box
+     *  NB: special case of refrigerator where we account for compressor cycling (divide by 3)
      */
     var recalculate = function(){
         console.log('Recalculating')
@@ -82,6 +83,7 @@ $(document).ready(function(){
           , hours = $hours.val()
           , days = $days.val()
           , rate = $states.val()
+          , $option
 
         $controls.each( function(){
             return (completed = $(this).val() ? true : false)
@@ -89,11 +91,14 @@ $(document).ready(function(){
 
         if (completed) {
 
+            $option = $appliances.find( 'option:selected' )
+
+            if ( $option.text() === 'Refrigerator' ) {
+                hours = Math.round( hours / 3 )
+            }
+
             energy = watts * hours *  days / 1000 // convert watts to kilowatts
             cost = Math.round( energy * rate ) / 100// convert rate from cents to dollars
-
-            //console.log('Energy use: '+watts+'W * '+hours+'h/day * '+days+'day/yr * 1kW/1000W = '+energy+'kWh/yr')
-            //console.log('Cost: Round( ' +energy+ 'kWh/yr * '+rate+'cents/kWh ) = '+Math.round( energy * rate )+'cents/yr * $1/100cents = $'+cost)
 
             $energy.html(  energy + ' kWh')
             $cost.html( '$' + cost )
@@ -185,6 +190,7 @@ $(document).ready(function(){
      *  Catch the special case - refrigerator
      *
      */
+    /*
     $('.appliance-group').on('rendered.bs.select', function(){
 
         var $option
@@ -217,7 +223,7 @@ $(document).ready(function(){
 
 
     })
-
+    */
 
     /**
      *  When the user changes any control, recalculate the totals
