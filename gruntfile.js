@@ -77,6 +77,7 @@ module.exports = function(grunt) {
     },
     clean: {
       dist: ['dist']
+      //dist: ['dist', '!dist/.gitkeep']
     },
 
     'gh-pages': {
