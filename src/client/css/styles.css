@@ -15,6 +15,12 @@ body {
     padding-top: 2em;
     font-family: 'Avenir LT W02 35 Light';
 }
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
 .title {
     background-color: #89c800;
     color: #000;
