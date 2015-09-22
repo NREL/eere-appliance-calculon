@@ -35,8 +35,10 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '/*!\n'+
-                ' * <%= pkg.name %>\n'+
-                ' * <%= grunt.template.today("dd-mm-yyyy") %>\n'+
+                ' * Project: <%= pkg.name %>\n'+
+                ' * Version: <%= pkg.version %>\n'+
+                ' * Author: <%= pkg.author %>\n'+
+                ' * Build Date: <%= grunt.template.today("dd-mm-yyyy") %>\n'+
                 ' */\n',
         sourceMap: true,
         sourceMapName: 'dist/client/js/app.js.map',
@@ -66,7 +68,7 @@ module.exports = function(grunt) {
 
     cssmin: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n\n'
       , keepSpecialComments: '*'
       },
       dist: {
@@ -90,7 +92,7 @@ module.exports = function(grunt) {
 
     // http://www.netorials.com/tutorials/static-websites-amazon-s3-grunt-part-2/
     'aws_s3': {
-        staging: {
+        release: {
             options: {
                 accessKeyId: s3.accessKeyId,
                 secretAccessKey: s3.secretAccessKey,
@@ -136,10 +138,10 @@ module.exports = function(grunt) {
     , 'gh-pages'
   ]);
 
-  grunt.registerTask('aws:staging', [
+  grunt.registerTask('deploy', [
       'clean:dist'
     , 'build'
-    , 'aws_s3:staging'
+    , 'aws_s3'
   ]);
 
   grunt.registerTask('build', [
