@@ -11,6 +11,18 @@
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.min.css" rel="stylesheet" media="all">
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      (function() {
+          var so = document.createElement('script');
+          so.type = 'text/javascript';
+          so.async = true;
+          so.src = '//apps1.eere.energy.gov/includes/ga/eere.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(so, s);
+      })();
+    </script>
+
     <!-- build:css client/css/styles.min.css -->
     <link href="client/css/styles.css" rel="stylesheet">
     <!-- endbuild -->
@@ -86,7 +98,6 @@
 
 
 <!-- Libraries -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 
