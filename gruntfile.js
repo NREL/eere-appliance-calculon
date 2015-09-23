@@ -119,6 +119,17 @@ module.exports = function(grunt) {
             ]
         }
     },
+
+    watch: {
+
+        //js: {
+            files: ['src/*'],
+            tasks: ['build'],
+            options: {
+                livereload: true,
+            }
+        //}
+    }
   });
 
   grunt.loadNpmTasks('grunt-usemin');
@@ -129,12 +140,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-aws-s3');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 
 
   grunt.registerTask('ghpages', [
       'clean:dist'
-    , 'default'
+    , 'build'
     , 'gh-pages'
   ]);
 
@@ -145,16 +157,16 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-      'default'
-  ]);
-
-  grunt.registerTask('default', [
       'copy'
     , 'useminPrepare'
     , 'jshint'
     , 'uglify'
     , 'cssmin'
     , 'usemin'
+  ]);
+
+  grunt.registerTask('default', [
+      'build'
   ]);
 
 
