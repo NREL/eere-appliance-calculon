@@ -8,6 +8,17 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    babel: {
+        options: {
+            sourceMap: true,
+            presets: ['es2015']
+        },
+        dist: {
+            files: {
+                'dist/client/js/app.js': 'dist/client/js/app.js'
+            }
+        }
+    },
 
     useminPrepare: {
       html: 'index.html',
@@ -53,19 +64,6 @@ module.exports = function(grunt) {
       }
     },
 
-    jshint: {
-      files: ['dist/client/js/app.js'],
-      options: {
-        globals: {
-          jQuery: true,
-          console: true,
-          document: true
-        },
-        laxcomma: true,
-        asi: true
-      }
-    },
-
     cssmin: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n\n'
@@ -77,10 +75,17 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    eslint: {
+        target: ['src/client/js/app.js']
+    },
+
     clean: {
       dist: ['dist']
       //dist: ['dist', '!dist/.gitkeep']
     },
+
+
 
     'gh-pages': {
       options: {
@@ -132,15 +137,15 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-usemin');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-aws-s3');
+  grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-eslint');
+  grunt.loadNpmTasks('grunt-gh-pages');
 
 
 
@@ -158,11 +163,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
       'copy'
-    , 'useminPrepare'
-    , 'jshint'
+    , 'eslint'
+    , 'babel'
     , 'uglify'
     , 'cssmin'
-    , 'usemin'
   ]);
 
   grunt.registerTask('default', [
