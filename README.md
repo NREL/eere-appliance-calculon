@@ -1,8 +1,19 @@
 eere-appliance-calculon
 =======================
 
-Prototype for a simple appliance calculator
+Prototype for a simple appliance calculator.
 
+Figure out how much energy your boom-box uses running it 24/7/365.  :speaker:
+
+Try out the Demo
+http://nrel.github.io/eere-appliance-calculon/
+
+![screenshot](./screenshot.jpg)
+
+
+
+
+## Development
 
 Work in the src folder.
 
@@ -22,3 +33,8 @@ module.exports = {
 
 
 See ```grunt --help``` for more tasks.
+
+## Background
+
+This calculator uses state energy rate data from the EIA API at
+http://www.eia.gov/opendata/
