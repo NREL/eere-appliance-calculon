@@ -11,17 +11,32 @@ http://nrel.github.io/eere-appliance-calculon/
 ![screenshot](./screenshot.jpg)
 
 
+## Requirements
 
+* Node.js (and you get npm with that)
+* Git
+* Grunt.js http://gruntjs.com/getting-started
+
+Run ```npm install -g grunt-cli``` while logged into the devvpn to install Grunt on your computer.
 
 ## Development
 
-Work in the src folder.
+Do your work in the src folder.
 
-Use the grunt default task to build the application in the ```dist``` folder
+Type ```grunt``` at the command line from the root of your project to run the default task. This will build the application in the ```dist``` folder. (you could also run ```grunt build```)
 
-Use the grunt aws task to deploy to Amazon S3, or the ghpages task to deploy to github.io.
+The default task will run the subtasks: copy/eslint/babel/uglify/cssmin.
 
-grunt will need your AWS credentials to push to AWS. By default it will look for a file called  /_config/s3.js at the root. That file should look like:
+There is also a ```grunt watch``` task that watches the ```src/``` folder for changes and then runs the build task.
+
+See ```grunt --help``` for more tasks.
+
+
+## Deployment
+
+This project can be deployed to two possible places. Use the ```grunt aws``` task to deploy to Amazon S3, or the ```grunt ghpages``` task to deploy to nrel.github.io. We are currently using nrel.github.io for our production site.
+
+If using AWS, grunt will need your AWS credentials to push to an S3 bucket. By default it will look for a file called  /_config/s3.js at the project root. That file should look like:
 
 
 ```js
@@ -31,8 +46,10 @@ module.exports = {
 }
 ```
 
+This file is added to .gitignore so you won't push your credentials to the repo.
 
-See ```grunt --help``` for more tasks.
+You can use this deployment if you want to push to the widgets.nrel.gov server.
+
 
 ## Background
 
