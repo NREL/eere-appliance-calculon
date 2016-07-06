@@ -27,7 +27,7 @@ Type ```grunt``` at the command line from the root of your project to run the de
 
 The default task will run the subtasks: copy/eslint/babel/uglify/cssmin.
 
-There is also a ```grunt watch``` task that watches the ```src/``` folder for changes and then runs the build task.
+There is also a ```grunt watch``` task that watches the ```src/``` folder for changes and then runs the build task. You'll need a LiveReload plugin to whatever browser you use. (e.g. https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)
 
 See ```grunt --help``` for more tasks.
 
